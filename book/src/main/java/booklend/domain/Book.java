@@ -56,13 +56,10 @@ public class Book  {
 //<<< Clean Arch / Port Method
     public void cancelApproved(CancelApprovedCommand cancelApprovedCommand){
         
-        //implement business logic here:
-        
+        //implement business logic here:        
         BookCancled bookCancled = new BookCancled(this);
         bookCancled.publishAfterCommit();
 
-        // booklend.external.BookQuery bookQuery = new booklend.external.BookQuery();
-        // BookApplication.applicationContext.getBean(booklend.external.Service.class).(bookQuery);
     }
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
@@ -78,18 +75,17 @@ public class Book  {
         bookApproved.publishAfterCommit();
         */
 
-        /** Example 2:  finding and process
-        
-        repository().findById(bookBorrowed.get???()).ifPresent(book->{
-            
-            book // do something
-            repository().save(book);
+         
+        repository().findById(bookBorrowed.getBookId()).ifPresent(book->{
 
+            if (book.getStatus().equals(book.AVAILABLE)) {
+                book.setBorrowStatus(BORROWED);
+                repository().save(book);
+            }
             BookApproved bookApproved = new BookApproved(book);
             bookApproved.publishAfterCommit();
-
          });
-        */
+        
 
         
     }
