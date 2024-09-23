@@ -9,10 +9,10 @@
                 <String label="Name" v-model="item.name" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <String label="CreateDt" v-model="item.createDt" :editMode="editMode" @change="change" />
+                <Date label="CreateDt" v-model="item.createDt" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <String label="UpdateDt" v-model="item.updateDt" :editMode="editMode" @change="change" />
+                <Date label="UpdateDt" v-model="item.updateDt" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
 

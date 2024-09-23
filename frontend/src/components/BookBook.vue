@@ -76,6 +76,20 @@
                     @create="create"
                 ></CreateCommand>
             </v-dialog>
+            <v-btn
+                v-if="!editMode"
+                color="primary"
+                text
+                @click="openCancelApproved"
+            >
+                CancelApproved
+            </v-btn>
+            <v-dialog v-model="cancelApprovedDiagram" width="500">
+                <CancelApprovedCommand
+                    @closeDialog="closeCancelApproved"
+                    @cancelApproved="cancelApproved"
+                ></CancelApprovedCommand>
+            </v-dialog>
         </v-card-actions>
 
         <v-snackbar
@@ -114,6 +128,7 @@
                 text: '',
             },
             createDiagram: false,
+            cancelApprovedDiagram: false,
         }),
 	async created() {
         },
@@ -231,6 +246,32 @@
                         this.snackbar.text = e
                     }
                 }
+            },
+            async cancelApproved(params) {
+                try {
+                    if(!this.offline) {
+                        var temp = await axios.put(axios.fixUrl(this.value._links['/update'].href), params)
+                        for(var k in temp.data) {
+                            this.value[k]=temp.data[k];
+                        }
+                    }
+
+                    this.editMode = false;
+                    this.closeCancelApproved();
+                } catch(e) {
+                    this.snackbar.status = true
+                    if(e.response && e.response.data.message) {
+                        this.snackbar.text = e.response.data.message
+                    } else {
+                        this.snackbar.text = e
+                    }
+                }
+            },
+            openCancelApproved() {
+                this.cancelApprovedDiagram = true;
+            },
+            closeCancelApproved() {
+                this.cancelApprovedDiagram = false;
             },
             async () {
                 try {

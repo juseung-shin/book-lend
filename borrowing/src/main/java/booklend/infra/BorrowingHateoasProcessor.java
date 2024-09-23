@@ -12,6 +12,17 @@ public class BorrowingHateoasProcessor
 
     @Override
     public EntityModel<Borrowing> process(EntityModel<Borrowing> model) {
+        model.add(
+            Link
+                .of(model.getRequiredLink("self").getHref() + "//request")
+                .withRel("/request")
+        );
+        model.add(
+            Link
+                .of(model.getRequiredLink("self").getHref() + "//retrun")
+                .withRel("/retrun")
+        );
+
         return model;
     }
 }

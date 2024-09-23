@@ -5,6 +5,8 @@
         </v-card-title>
 
         <v-card-text>
+            <Number label="UserId" v-model="value.userId" :editMode="editMode"/>
+            <Number label="BookId" v-model="value.bookId" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -40,6 +42,8 @@
             value: {},
         }),
         created() {
+            this.value.userId = 0;
+            this.value.bookId = 0;
         },
         watch: {
         },

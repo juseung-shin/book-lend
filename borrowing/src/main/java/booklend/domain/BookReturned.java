@@ -15,7 +15,6 @@ public class BookReturned extends AbstractEvent {
     private String userId;
     private String bookId;
     private String status;
-    private Date returnDt;
 
     public BookReturned(Borrowing aggregate) {
         super(aggregate);
