@@ -20,7 +20,7 @@
             <String label="Status" v-model="value.status" :editMode="editMode" :inputUI="''"/>
             <Date label="CreateDt" v-model="value.createDt" :editMode="editMode" :inputUI="''"/>
             <Date label="UpdateDt" v-model="value.updateDt" :editMode="editMode" :inputUI="''"/>
-            <String label="Borrowid" v-model="value.borrowid" :editMode="editMode" :inputUI="''"/>
+            <Number label="Borrowid" v-model="value.borrowid" :editMode="editMode" :inputUI="''"/>
             <String label="BorrowStatus" v-model="value.borrowStatus" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 

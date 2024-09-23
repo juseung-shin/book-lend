@@ -26,7 +26,7 @@ public class Book  {
     private String status;
     private Date createDt;
     private Date updateDt;
-    private String borrowid;
+    private Long borrowid;
     private String borrowStatus;
 
     @PostPersist

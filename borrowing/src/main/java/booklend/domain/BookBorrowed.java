@@ -12,9 +12,9 @@ import lombok.*;
 public class BookBorrowed extends AbstractEvent {
 
     private Long id;
-    private String bookId;
+    private Long bookId;
     private String status;
-    private String userId;
+    private Long userId;
     private Date createDt;
 
     public BookBorrowed(Borrowing aggregate) {
