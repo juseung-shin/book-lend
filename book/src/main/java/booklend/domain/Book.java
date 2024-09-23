@@ -12,58 +12,27 @@ import java.time.LocalDate;
 @Entity
 @Table(name="Book_table")
 @Data
-
 //<<< DDD / Aggregate Root
 public class Book  {
 
-
+    public static String UNAVAILABLE = "UNAVAILABLE"; // 대여불가능
+    public static String AVAILABLE = "AVAILABLE";     // 대여가능
+    public static String BORROWED = "BORROWED";       // 대여중
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
+    @GeneratedValue(strategy=GenerationType.AUTO)   
     private Long id;
-    
-    
-    
-    
     private String title;
-    
-    
-    
-    
     private String status;
-    
-    
-    
-    
     private Date createDt;
-    
-    
-    
-    
     private Date updateDt;
-    
-    
-    
-    
     private String borrowid;
-    
-    
-    
-    
     private String borrowStatus;
 
     @PostPersist
     public void onPostPersist(){
-
-
         BookApproved bookApproved = new BookApproved(this);
         bookApproved.publishAfterCommit();
-
-    
     }
 
     public static BookRepository repository(){
@@ -77,9 +46,12 @@ public class Book  {
     public void create(CreateCommand createCommand){
         
         //implement business logic here:
-        
+        this.setCreateDt(new Date());
+        this.setTitle(createCommand.getTitle());
+        this.setStatus(AVAILABLE);
 
     }
+
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
     public void cancelApproved(CancelApprovedCommand cancelApprovedCommand){
@@ -89,14 +61,10 @@ public class Book  {
         BookCancled bookCancled = new BookCancled(this);
         bookCancled.publishAfterCommit();
 
-
-        booklend.external.BookQuery bookQuery = new booklend.external.BookQuery();
-        BookApplication.applicationContext
-            .getBean(booklend.external.Service.class)
-            .( bookQuery);
+        // booklend.external.BookQuery bookQuery = new booklend.external.BookQuery();
+        // BookApplication.applicationContext.getBean(booklend.external.Service.class).(bookQuery);
     }
 //>>> Clean Arch / Port Method
-
 //<<< Clean Arch / Port Method
     public static void ifApproveBorrow(BookBorrowed bookBorrowed){
         

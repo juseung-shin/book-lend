@@ -36,6 +36,8 @@ public class User {
     //<<< Clean Arch / Port Method
     public void register(RegisterCommand registerCommand) {
         //implement business logic here:
+        this.setCreateDt(new Date());
+        this.setName(registerCommand.getName());
         UserRegisterd userRegisterd = new UserRegisterd(this);
         userRegisterd.publishAfterCommit();
     }
