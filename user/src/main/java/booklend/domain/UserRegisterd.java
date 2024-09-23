@@ -13,8 +13,8 @@ public class UserRegisterd extends AbstractEvent {
 
     private Long id;
     private String name;
-    private String createDt;
-    private String updateDt;
+    private Date createDt;
+    private Date updateDt;
 
     public UserRegisterd(User aggregate) {
         super(aggregate);
