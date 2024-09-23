@@ -19,5 +19,39 @@ public class BorrowingController {
 
     @Autowired
     BorrowingRepository borrowingRepository;
+
+    @RequestMapping(
+        value = "/borrowings/request",
+        method = RequestMethod.POST,
+        produces = "application/json;charset=UTF-8"
+    )
+    public Borrowing request(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        @RequestBody RequestCommand requestCommand
+    ) throws Exception {
+        System.out.println("##### /borrowing/request  called #####");
+        Borrowing borrowing = new Borrowing();
+        borrowing.request(requestCommand);
+        borrowingRepository.save(borrowing);
+        return borrowing;
+    }
+
+    @RequestMapping(
+        value = "/borrowings/retrun",
+        method = RequestMethod.POST,
+        produces = "application/json;charset=UTF-8"
+    )
+    public Borrowing retrun(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        @RequestBody RetrunCommand retrunCommand
+    ) throws Exception {
+        System.out.println("##### /borrowing/retrun  called #####");
+        Borrowing borrowing = new Borrowing();
+        borrowing.retrun(retrunCommand);
+        borrowingRepository.save(borrowing);
+        return borrowing;
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

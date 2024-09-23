@@ -19,5 +19,22 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+    @RequestMapping(
+        value = "/users/register",
+        method = RequestMethod.POST,
+        produces = "application/json;charset=UTF-8"
+    )
+    public User register(
+        HttpServletRequest request,
+        HttpServletResponse response,
+        @RequestBody RegisterCommand registerCommand
+    ) throws Exception {
+        System.out.println("##### /user/register  called #####");
+        User user = new User();
+        user.register(registerCommand);
+        userRepository.save(user);
+        return user;
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

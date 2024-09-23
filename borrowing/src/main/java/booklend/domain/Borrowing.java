@@ -1,8 +1,6 @@
 package booklend.domain;
 
 import booklend.BorrowingApplication;
-import booklend.domain.BookBorrowed;
-import booklend.domain.BookReturned;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -34,13 +32,7 @@ public class Borrowing {
     private Date confirmDt;
 
     @PostPersist
-    public void onPostPersist() {
-        BookBorrowed bookBorrowed = new BookBorrowed(this);
-        bookBorrowed.publishAfterCommit();
-
-        BookReturned bookReturned = new BookReturned(this);
-        bookReturned.publishAfterCommit();
-    }
+    public void onPostPersist() {}
 
     public static BorrowingRepository repository() {
         BorrowingRepository borrowingRepository = BorrowingApplication.applicationContext.getBean(
@@ -49,19 +41,24 @@ public class Borrowing {
         return borrowingRepository;
     }
 
-    public void request() {
+    //<<< Clean Arch / Port Method
+    public void request(RequestCommand requestCommand) {
         //implement business logic here:
 
         BookBorrowed bookBorrowed = new BookBorrowed(this);
         bookBorrowed.publishAfterCommit();
     }
 
-    public void retrun() {
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public void retrun(RetrunCommand retrunCommand) {
         //implement business logic here:
 
         BookReturned bookReturned = new BookReturned(this);
         bookReturned.publishAfterCommit();
     }
+
+    //>>> Clean Arch / Port Method
 
     //<<< Clean Arch / Port Method
     public static void resultApprove(BookApproved bookApproved) {

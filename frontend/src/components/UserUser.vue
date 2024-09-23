@@ -17,8 +17,8 @@
 
         <v-card-text>
             <String label="Name" v-model="value.name" :editMode="editMode" :inputUI="''"/>
-            <String label="CreateDt" v-model="value.createDt" :editMode="editMode" :inputUI="''"/>
-            <String label="UpdateDt" v-model="value.updateDt" :editMode="editMode" :inputUI="''"/>
+            <Date label="CreateDt" v-model="value.createDt" :editMode="editMode" :inputUI="''"/>
+            <Date label="UpdateDt" v-model="value.updateDt" :editMode="editMode" :inputUI="''"/>
         </v-card-text>
 
         <v-card-actions>
@@ -37,7 +37,7 @@
                     text
                     @click="save"
                 >
-                    Register
+                저장
                 </v-btn>
                 <v-btn
                     color="primary"
@@ -59,6 +59,20 @@
         </v-card-actions>
         <v-card-actions>
             <v-spacer></v-spacer>
+            <v-btn
+                v-if="!editMode"
+                color="primary"
+                text
+                @click="openRegister"
+            >
+                Register
+            </v-btn>
+            <v-dialog v-model="registerDiagram" width="500">
+                <RegisterCommand
+                    @closeDialog="closeRegister"
+                    @register="register"
+                ></RegisterCommand>
+            </v-dialog>
         </v-card-actions>
 
         <v-snackbar
@@ -96,6 +110,7 @@
                 timeout: 5000,
                 text: '',
             },
+            registerDiagram: false,
         }),
 	async created() {
         },
@@ -192,6 +207,27 @@
             },
             change(){
                 this.$emit('input', this.value);
+            },
+            async register() {
+                try {
+                    if(!this.offline){
+                        var temp = await axios.post(axios.fixUrl(this.value._links['/register'].href))
+                        for(var k in temp.data) this.value[k]=temp.data[k];
+                    }
+
+                    this.editMode = false;
+                    
+                    this.$emit('input', this.value);
+                    this.$emit('delete', this.value);
+                
+                } catch(e) {
+                    this.snackbar.status = true
+                    if(e.response && e.response.data.message) {
+                        this.snackbar.text = e.response.data.message
+                    } else {
+                        this.snackbar.text = e
+                    }
+                }
             },
         },
     }

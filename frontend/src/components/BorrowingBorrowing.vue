@@ -41,14 +41,7 @@
                     text
                     @click="save"
                 >
-                    Request
-                </v-btn>
-                <v-btn
-                    color="primary"
-                    text
-                    @click="save"
-                >
-                    Retrun
+                저장
                 </v-btn>
                 <v-btn
                     color="primary"
@@ -70,6 +63,34 @@
         </v-card-actions>
         <v-card-actions>
             <v-spacer></v-spacer>
+            <v-btn
+                v-if="!editMode"
+                color="primary"
+                text
+                @click="openRequest"
+            >
+                Request
+            </v-btn>
+            <v-dialog v-model="requestDiagram" width="500">
+                <RequestCommand
+                    @closeDialog="closeRequest"
+                    @request="request"
+                ></RequestCommand>
+            </v-dialog>
+            <v-btn
+                v-if="!editMode"
+                color="primary"
+                text
+                @click="openRetrun"
+            >
+                Retrun
+            </v-btn>
+            <v-dialog v-model="retrunDiagram" width="500">
+                <RetrunCommand
+                    @closeDialog="closeRetrun"
+                    @retrun="retrun"
+                ></RetrunCommand>
+            </v-dialog>
         </v-card-actions>
 
         <v-snackbar
@@ -107,6 +128,8 @@
                 timeout: 5000,
                 text: '',
             },
+            requestDiagram: false,
+            retrunDiagram: false,
         }),
 	async created() {
         },
@@ -203,6 +226,48 @@
             },
             change(){
                 this.$emit('input', this.value);
+            },
+            async request() {
+                try {
+                    if(!this.offline){
+                        var temp = await axios.post(axios.fixUrl(this.value._links['/request'].href))
+                        for(var k in temp.data) this.value[k]=temp.data[k];
+                    }
+
+                    this.editMode = false;
+                    
+                    this.$emit('input', this.value);
+                    this.$emit('delete', this.value);
+                
+                } catch(e) {
+                    this.snackbar.status = true
+                    if(e.response && e.response.data.message) {
+                        this.snackbar.text = e.response.data.message
+                    } else {
+                        this.snackbar.text = e
+                    }
+                }
+            },
+            async retrun() {
+                try {
+                    if(!this.offline){
+                        var temp = await axios.post(axios.fixUrl(this.value._links['/retrun'].href))
+                        for(var k in temp.data) this.value[k]=temp.data[k];
+                    }
+
+                    this.editMode = false;
+                    
+                    this.$emit('input', this.value);
+                    this.$emit('delete', this.value);
+                
+                } catch(e) {
+                    this.snackbar.status = true
+                    if(e.response && e.response.data.message) {
+                        this.snackbar.text = e.response.data.message
+                    } else {
+                        this.snackbar.text = e
+                    }
+                }
             },
         },
     }

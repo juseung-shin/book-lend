@@ -1,7 +1,6 @@
 package booklend.domain;
 
 import booklend.UserApplication;
-import booklend.domain.UserRegisterd;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -20,15 +19,12 @@ public class User {
 
     private String name;
 
-    private String createDt;
+    private Date createDt;
 
-    private String updateDt;
+    private Date updateDt;
 
     @PostPersist
-    public void onPostPersist() {
-        UserRegisterd userRegisterd = new UserRegisterd(this);
-        userRegisterd.publishAfterCommit();
-    }
+    public void onPostPersist() {}
 
     public static UserRepository repository() {
         UserRepository userRepository = UserApplication.applicationContext.getBean(
@@ -37,11 +33,14 @@ public class User {
         return userRepository;
     }
 
-    public void register() {
+    //<<< Clean Arch / Port Method
+    public void register(RegisterCommand registerCommand) {
         //implement business logic here:
 
         UserRegisterd userRegisterd = new UserRegisterd(this);
         userRegisterd.publishAfterCommit();
     }
+    //>>> Clean Arch / Port Method
+
 }
 //>>> DDD / Aggregate Root

@@ -36,5 +36,27 @@ public class BookController {
         bookRepository.save(book);
         return book;
     }
+
+    @RequestMapping(
+        value = "/books/{id}//update",
+        method = RequestMethod.PUT,
+        produces = "application/json;charset=UTF-8"
+    )
+    public Book cancelApproved(
+        @PathVariable(value = "id") Long id,
+        @RequestBody CancelApprovedCommand cancelApprovedCommand,
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws Exception {
+        System.out.println("##### /book/cancelApproved  called #####");
+        Optional<Book> optionalBook = bookRepository.findById(id);
+
+        optionalBook.orElseThrow(() -> new Exception("No Entity Found"));
+        Book book = optionalBook.get();
+        book.cancelApproved(cancelApprovedCommand);
+
+        bookRepository.save(book);
+        return book;
+    }
 }
 //>>> Clean Arch / Inbound Adaptor
