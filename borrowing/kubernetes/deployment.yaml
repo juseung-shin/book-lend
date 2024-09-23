@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: borrowing
-          image: "username/borrowing:latest"
+          image: "juseung/borrowing:latest"
           ports:
             - containerPort: 8080
           readinessProbe:

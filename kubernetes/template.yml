@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: book
-          image: username/book:latest
+          image: juseung/book:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
         - name: user
-          image: username/user:latest
+          image: juseung/user:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -98,7 +98,7 @@ spec:
     spec:
       containers:
         - name: borrowing
-          image: username/borrowing:latest
+          image: juseung/borrowing:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -138,7 +138,7 @@ spec:
     spec:
       containers:
         - name: mypage
-          image: username/mypage:latest
+          image: juseung/mypage:latest
           ports:
             - containerPort: 8080
           readinessProbe:

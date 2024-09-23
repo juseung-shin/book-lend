@@ -39,7 +39,6 @@ public class User {
 
     public void register() {
         //implement business logic here:
-
         UserRegisterd userRegisterd = new UserRegisterd(this);
         userRegisterd.publishAfterCommit();
     }
