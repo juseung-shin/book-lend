@@ -247,17 +247,18 @@
                     }
                 }
             },
-            async cancelApproved(params) {
+            async cancelApproved() {
                 try {
-                    if(!this.offline) {
-                        var temp = await axios.put(axios.fixUrl(this.value._links['/update'].href), params)
-                        for(var k in temp.data) {
-                            this.value[k]=temp.data[k];
-                        }
+                    if(!this.offline){
+                        var temp = await axios.post(axios.fixUrl(this.value._links['/cancel'].href))
+                        for(var k in temp.data) this.value[k]=temp.data[k];
                     }
 
                     this.editMode = false;
-                    this.closeCancelApproved();
+                    
+                    this.$emit('input', this.value);
+                    this.$emit('delete', this.value);
+                
                 } catch(e) {
                     this.snackbar.status = true
                     if(e.response && e.response.data.message) {
@@ -266,12 +267,6 @@
                         this.snackbar.text = e
                     }
                 }
-            },
-            openCancelApproved() {
-                this.cancelApprovedDiagram = true;
-            },
-            closeCancelApproved() {
-                this.cancelApprovedDiagram = false;
             },
             async () {
                 try {

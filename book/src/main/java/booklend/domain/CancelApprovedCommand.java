@@ -7,6 +7,5 @@ import lombok.Data;
 @Data
 public class CancelApprovedCommand {
 
-    private String status;
-    private String tite;
+    private String borrowId;
 }
