@@ -5,8 +5,7 @@
         </v-card-title>
 
         <v-card-text>
-            <String label="Status" v-model="value.status" :editMode="editMode"/>
-            <String label="Tite" v-model="value.tite" :editMode="editMode"/>
+            <String label="BorrowId" v-model="value.borrowId" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -42,8 +41,7 @@
             value: {},
         }),
         created() {
-            this.value.status = '';
-            this.value.tite = '';
+            this.value.borrowId = '';
         },
         watch: {
         },

@@ -38,23 +38,18 @@ public class BookController {
     }
 
     @RequestMapping(
-        value = "/books/{id}//update",
-        method = RequestMethod.PUT,
+        value = "/books/cancel",
+        method = RequestMethod.POST,
         produces = "application/json;charset=UTF-8"
     )
     public Book cancelApproved(
-        @PathVariable(value = "id") Long id,
-        @RequestBody CancelApprovedCommand cancelApprovedCommand,
         HttpServletRequest request,
-        HttpServletResponse response
+        HttpServletResponse response,
+        @RequestBody CancelApprovedCommand cancelApprovedCommand
     ) throws Exception {
         System.out.println("##### /book/cancelApproved  called #####");
-        Optional<Book> optionalBook = bookRepository.findById(id);
-
-        optionalBook.orElseThrow(() -> new Exception("No Entity Found"));
-        Book book = optionalBook.get();
+        Book book = new Book();
         book.cancelApproved(cancelApprovedCommand);
-
         bookRepository.save(book);
         return book;
     }
