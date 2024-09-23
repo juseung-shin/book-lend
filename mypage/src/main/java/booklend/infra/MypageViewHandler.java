@@ -59,5 +59,27 @@ public class MypageViewHandler {
             e.printStackTrace();
         }
     }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenBookCancled_then_UPDATE_2(
+        @Payload BookCancled bookCancled
+    ) {
+        try {
+            if (!bookCancled.validate()) return;
+            // view 객체 조회
+
+            List<Mypage> mypageList = mypageRepository.findByBorrowId(
+                bookCancled.getBorrowid()
+            );
+            for (Mypage mypage : mypageList) {
+                // view 객체에 이벤트의 eventDirectValue 를 set 함
+                mypage.setStatus(Long.valueOf(bookCancled.getStatus()));
+                // view 레파지 토리에 save
+                mypageRepository.save(mypage);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     //>>> DDD / CQRS
 }
