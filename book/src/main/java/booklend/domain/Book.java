@@ -49,7 +49,7 @@ public class Book  {
     
     
     
-    private String borrowid;
+    private Long borrowid;
     
     
     

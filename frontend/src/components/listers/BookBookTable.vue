@@ -94,7 +94,7 @@
                 'status': '',
                 'createDt': '2024-09-23',
                 'updateDt': '2024-09-23',
-                'borrowid': '',
+                'borrowid': 0,
                 'borrowStatus': '',
             }
         },
