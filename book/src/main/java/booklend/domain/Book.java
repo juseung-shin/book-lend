@@ -82,13 +82,10 @@ public class Book  {
     }
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
-    public void cancelApproved(CancelApprovedCommand cancelApprovedCommand){
+    public void update(UpdateCommand updateCommand){
         
         //implement business logic here:
         
-        BookCancled bookCancled = new BookCancled(this);
-        bookCancled.publishAfterCommit();
-
 
         booklend.external.BookQuery bookQuery = new booklend.external.BookQuery();
         BookApplication.applicationContext

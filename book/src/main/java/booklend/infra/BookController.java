@@ -38,18 +38,18 @@ public class BookController {
     }
 
     @RequestMapping(
-        value = "/books/cancel",
+        value = "/books/update",
         method = RequestMethod.POST,
         produces = "application/json;charset=UTF-8"
     )
-    public Book cancelApproved(
+    public Book update(
         HttpServletRequest request,
         HttpServletResponse response,
-        @RequestBody CancelApprovedCommand cancelApprovedCommand
+        @RequestBody UpdateCommand updateCommand
     ) throws Exception {
-        System.out.println("##### /book/cancelApproved  called #####");
+        System.out.println("##### /book/update  called #####");
         Book book = new Book();
-        book.cancelApproved(cancelApprovedCommand);
+        book.update(updateCommand);
         bookRepository.save(book);
         return book;
     }

@@ -19,8 +19,8 @@ public class BookHateoasProcessor
         );
         model.add(
             Link
-                .of(model.getRequiredLink("self").getHref() + "//cancel")
-                .withRel("/cancel")
+                .of(model.getRequiredLink("self").getHref() + "//update")
+                .withRel("/update")
         );
 
         return model;
