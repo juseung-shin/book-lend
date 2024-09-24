@@ -7,10 +7,11 @@ import lombok.*;
 
 @Data
 @ToString
-public class BookApproved extends AbstractEvent {
+public class BookRejected extends AbstractEvent {
 
     private Long id;
+    private String status;
     private Date updateDt;
-    private Long borrowid;
+    private Long borrowId;
     private String borrowStatus;
 }

@@ -1,5 +1,6 @@
 package booklend.domain;
 
+import booklend.domain.BookRejected;
 import booklend.domain.BookApproved;
 import booklend.BookApplication;
 import javax.persistence.*;
@@ -31,8 +32,13 @@ public class Book  {
 
     @PostPersist
     public void onPostPersist(){
-        BookApproved bookApproved = new BookApproved(this);
-        bookApproved.publishAfterCommit();
+        if (this.getStatus().equals(AVAILABLE)) {
+            BookApproved bookApproved = new BookApproved(this);
+            bookApproved.publishAfterCommit();
+        } else {
+            BookRejected bookRejected = new BookRejected(this);
+            bookRejected.publishAfterCommit();    
+        }
     }
 
     public static BookRepository repository(){
@@ -63,7 +69,7 @@ public class Book  {
     }
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
-    public static void ifApproveBorrow(BookBorrowed bookBorrowed){
+    public static void approveBook(BookBorrowed bookBorrowed){
         
         //implement business logic here:
 
@@ -71,20 +77,27 @@ public class Book  {
         Book book = new Book();
         repository().save(book);
 
+        BookRejected bookRejected = new BookRejected(book);
+        bookRejected.publishAfterCommit();
         BookApproved bookApproved = new BookApproved(book);
         bookApproved.publishAfterCommit();
         */
 
          
         repository().findById(bookBorrowed.getBookId()).ifPresent(book->{
-
+            
             if (book.getStatus().equals(book.AVAILABLE)) {
-                book.setBorrowStatus(BORROWED);
-                repository().save(book);
+                BookApproved bookApproved = new BookApproved(book);
+                bookApproved.publishAfterCommit();
+            } else {
+                BookRejected bookRejected = new BookRejected(book);
+                bookRejected.publishAfterCommit();
             }
-            BookApproved bookApproved = new BookApproved(book);
-            bookApproved.publishAfterCommit();
-         });
+       
+           
+
+        
+        });
         
 
         

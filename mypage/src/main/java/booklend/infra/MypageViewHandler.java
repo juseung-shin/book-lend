@@ -41,15 +41,15 @@ public class MypageViewHandler {
 
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenBookApproved_then_UPDATE_1(@Payload BookApproved bookApproved) {
+    public void whenBookRejected_then_UPDATE_1(@Payload BookRejected bookRejected) {
         try {
-            if (!bookApproved.validate()) return;
+            if (!bookRejected.validate()) return;
                 // view 객체 조회
 
-                List<Mypage> mypageList = mypageRepository.findByBorrowId(bookApproved.getBorrowId());
+                List<Mypage> mypageList = mypageRepository.findByBorrowId(bookRejected.getBorrowId());
                 for(Mypage mypage : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
-                    mypage.setStatus(Long.valueOf(bookApproved.getStatus()));
+                    mypage.setStatus(Long.valueOf(bookRejected.getStatus()));
                 // view 레파지 토리에 save
                 mypageRepository.save(mypage);
                 }

@@ -25,18 +25,34 @@ public class PolicyHandler {
 
     @StreamListener(
         value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='BookRejected'"
+    )
+    public void wheneverBookRejected_UpdateStatus(
+        @Payload BookRejected bookRejected
+    ) {
+        BookRejected event = bookRejected;
+        System.out.println(
+            "\n\n##### listener UpdateStatus : " + bookRejected + "\n\n"
+        );
+
+        // Sample Logic //
+        Borrowing.updateStatus(event);
+    }
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
         condition = "headers['type']=='BookApproved'"
     )
-    public void wheneverBookApproved_ResultApprove(
+    public void wheneverBookApproved_UpdateStatus(
         @Payload BookApproved bookApproved
     ) {
         BookApproved event = bookApproved;
         System.out.println(
-            "\n\n##### listener ResultApprove : " + bookApproved + "\n\n"
+            "\n\n##### listener UpdateStatus : " + bookApproved + "\n\n"
         );
 
         // Sample Logic //
-        Borrowing.resultApprove(event);
+        Borrowing.updateStatus(event);
     }
 }
 //>>> Clean Arch / Inbound Adaptor

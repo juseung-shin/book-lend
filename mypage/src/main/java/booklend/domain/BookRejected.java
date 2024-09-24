@@ -1,16 +1,16 @@
 package booklend.domain;
 
-import booklend.domain.*;
 import booklend.infra.AbstractEvent;
+import java.time.LocalDate;
 import java.util.*;
-import lombok.*;
+import lombok.Data;
 
 @Data
-@ToString
-public class BookApproved extends AbstractEvent {
+public class BookRejected extends AbstractEvent {
 
     private Long id;
+    private String status;
     private Date updateDt;
-    private Long borrowid;
+    private Long borrowId;
     private String borrowStatus;
 }

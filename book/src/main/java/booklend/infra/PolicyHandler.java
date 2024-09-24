@@ -27,16 +27,16 @@ public class PolicyHandler {
         value = KafkaProcessor.INPUT,
         condition = "headers['type']=='BookBorrowed'"
     )
-    public void wheneverBookBorrowed_IfApproveBorrow(
+    public void wheneverBookBorrowed_ApproveBook(
         @Payload BookBorrowed bookBorrowed
     ) {
         BookBorrowed event = bookBorrowed;
         System.out.println(
-            "\n\n##### listener IfApproveBorrow : " + bookBorrowed + "\n\n"
+            "\n\n##### listener ApproveBook : " + bookBorrowed + "\n\n"
         );
 
         // Sample Logic //
-        Book.ifApproveBorrow(event);
+        Book.approveBook(event);
     }
 
     @StreamListener(
