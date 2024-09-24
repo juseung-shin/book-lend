@@ -23,5 +23,6 @@ public class BookApproved extends AbstractEvent {
     public BookApproved() {
         super();
     }
+
 }
 //>>> DDD / Domain Event

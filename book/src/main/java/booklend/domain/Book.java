@@ -20,6 +20,12 @@ public class Book  {
     public static String AVAILABLE = "AVAILABLE";     // 대여가능
     public static String BORROWED = "BORROWED";       // 대여중
     
+    public static String REQUESTED = "REQUESTED";     // 대여요청
+    public static String APPROVED = "APPROVED";       // 대여승인
+    public static String REJECTED = "REJECTED";       // 대여거절
+    public static String RETURNED = "RETURNED";       // 반납
+
+
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)   
     private Long id;
@@ -33,9 +39,11 @@ public class Book  {
     @PostPersist
     public void onPostPersist(){
         if (this.getStatus().equals(AVAILABLE)) {
+            this.setBorrowStatus(APPROVED);
             BookApproved bookApproved = new BookApproved(this);
             bookApproved.publishAfterCommit();
         } else {
+            this.setBorrowStatus(REJECTED);
             BookRejected bookRejected = new BookRejected(this);
             bookRejected.publishAfterCommit();    
         }
@@ -87,19 +95,16 @@ public class Book  {
         repository().findById(bookBorrowed.getBookId()).ifPresent(book->{
             
             if (book.getStatus().equals(book.AVAILABLE)) {
+                book.setBorrowStatus(APPROVED);
                 BookApproved bookApproved = new BookApproved(book);
                 bookApproved.publishAfterCommit();
             } else {
+                book.setBorrowStatus(REJECTED);
                 BookRejected bookRejected = new BookRejected(book);
                 bookRejected.publishAfterCommit();
             }
-       
-           
-
         
-        });
-        
-
+        });       
         
     }
 //>>> Clean Arch / Port Method
@@ -114,16 +119,16 @@ public class Book  {
 
         */
 
-        /** Example 2:  finding and process
+     
         
-        repository().findById(bookReturned.get???()).ifPresent(book->{
+        repository().findById(bookReturned.getBookId()).ifPresent(book->{
             
-            book // do something
+            book.setStatus(book.RETURNED);
             repository().save(book);
 
 
          });
-        */
+     
 
         
     }
