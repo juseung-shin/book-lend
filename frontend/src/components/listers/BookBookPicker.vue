@@ -27,7 +27,7 @@
                                 UpdateDt :  {{item.updateDt }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
-                                Borrowid :  {{item.borrowid }}
+                                BorrowId :  {{item.borrowId }}
                             </v-list-item-subtitle>
                             <v-list-item-subtitle>
                                 BorrowStatus :  {{item.borrowStatus }}

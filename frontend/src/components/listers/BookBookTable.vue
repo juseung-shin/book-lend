@@ -71,7 +71,7 @@
                     { text: "status", value: "status" },
                     { text: "createDt", value: "createDt" },
                     { text: "updateDt", value: "updateDt" },
-                    { text: "borrowid", value: "borrowid" },
+                    { text: "borrowId", value: "borrowId" },
                     { text: "borrowStatus", value: "borrowStatus" },
                 ],
             book : [],
@@ -94,7 +94,7 @@
                 'status': '',
                 'createDt': '2024-09-24',
                 'updateDt': '2024-09-24',
-                'borrowid': 0,
+                'borrowId': 0,
                 'borrowStatus': '',
             }
         },

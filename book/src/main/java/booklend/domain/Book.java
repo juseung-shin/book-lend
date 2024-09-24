@@ -50,7 +50,7 @@ public class Book  {
     
     
     
-    private Long borrowid;
+    private Long borrowId;
     
     
     

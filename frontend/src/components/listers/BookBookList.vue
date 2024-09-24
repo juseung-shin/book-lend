@@ -55,7 +55,7 @@
                             [ Status :  {{data.status }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ CreateDt :  {{data.createDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ UpdateDt :  {{data.updateDt }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            [ Borrowid :  {{data.borrowid }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            [ BorrowId :  {{data.borrowId }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             [ BorrowStatus :  {{data.borrowStatus }} ] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </v-list-item-subtitle>
 
@@ -128,7 +128,7 @@
                 'status': '',
                 'createDt': '2024-09-24',
                 'updateDt': '2024-09-24',
-                'borrowid': 0,
+                'borrowId': 0,
                 'borrowStatus': '',
             }
         },

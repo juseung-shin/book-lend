@@ -113,7 +113,7 @@
                 'status': '',
                 'createDt': '2024-09-24',
                 'updateDt': '2024-09-24',
-                'borrowid': 0,
+                'borrowId': 0,
                 'borrowStatus': '',
             }
         },
