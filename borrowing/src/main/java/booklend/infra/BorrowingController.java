@@ -1,6 +1,8 @@
 package booklend.infra;
 
 import booklend.domain.*;
+
+import java.util.Date;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +33,8 @@ public class BorrowingController {
         @RequestBody RequestCommand requestCommand
     ) throws Exception {
         System.out.println("##### /borrowing/request  called #####");
-        Borrowing borrowing = new Borrowing();
+        System.out.println("RequestCommand : " + requestCommand.toString());
+        Borrowing borrowing = new Borrowing();       
         borrowing.request(requestCommand);
         borrowingRepository.save(borrowing);
         return borrowing;

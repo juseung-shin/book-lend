@@ -13,6 +13,11 @@ import lombok.Data;
 //<<< DDD / Aggregate Root
 public class Borrowing {
 
+    public static String REQUESTED = "REQUESTED";     // 대여요청
+    public static String APPROVED = "APPROVED";       // 대여승인
+    public static String REJECTED = "REJECTED";       // 대여거절
+    public static String RETURNED = "RETURNED";       // 반납
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -44,7 +49,10 @@ public class Borrowing {
     //<<< Clean Arch / Port Method
     public void request(RequestCommand requestCommand) {
         //implement business logic here:
-
+        this.setBookId(requestCommand.getBookId());
+        this.setUserId(requestCommand.getUserId());
+        this.setCreateDt(new Date());
+        this.setStatus(REQUESTED);
         BookBorrowed bookBorrowed = new BookBorrowed(this);
         bookBorrowed.publishAfterCommit();
     }
@@ -62,49 +70,24 @@ public class Borrowing {
 
     //<<< Clean Arch / Port Method
     public static void updateStatus(BookRejected bookRejected) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Borrowing borrowing = new Borrowing();
-        repository().save(borrowing);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(bookRejected.get???()).ifPresent(borrowing->{
-            
-            borrowing // do something
+ 
+        repository().findById(bookRejected.getBorrowId()).ifPresent(borrowing->{
+            borrowing.setRejectDt(bookRejected.getUpdateDt());
+            borrowing.setStatus(bookRejected.getBorrowStatus());
             repository().save(borrowing);
-
-
          });
-        */
-
+     
     }
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
     public static void updateStatus(BookApproved bookApproved) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Borrowing borrowing = new Borrowing();
-        repository().save(borrowing);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(bookApproved.get???()).ifPresent(borrowing->{
-            
-            borrowing // do something
+   
+        repository().findById(bookApproved.getBorrowId()).ifPresent(borrowing->{
+            borrowing.setConfirmDt(bookApproved.getUpdateDt());
+            borrowing.setStatus(bookApproved.getBorrowStatus());
             repository().save(borrowing);
-
-
          });
-        */
-
     }
     //>>> Clean Arch / Port Method
 
