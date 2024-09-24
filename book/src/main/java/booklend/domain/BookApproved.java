@@ -13,7 +13,7 @@ public class BookApproved extends AbstractEvent {
 
     private Long id;
     private Date updateDt;
-    private Long borrowid;
+    private Long borrowId;
     private String borrowStatus;
 
     public BookApproved(Book aggregate) {
