@@ -16,8 +16,8 @@
         </v-card-title >        
 
         <v-card-text>
-            <String label="UserId" v-model="value.userId" :editMode="editMode" :inputUI="''"/>
-            <String label="BookId" v-model="value.bookId" :editMode="editMode" :inputUI="''"/>
+            <Number label="UserId" v-model="value.userId" :editMode="editMode" :inputUI="''"/>
+            <Number label="BookId" v-model="value.bookId" :editMode="editMode" :inputUI="''"/>
             <String label="Status" v-model="value.status" :editMode="editMode" :inputUI="''"/>
             <Date label="CreateDt" v-model="value.createDt" :editMode="editMode" :inputUI="''"/>
             <Date label="ReturnDt" v-model="value.returnDt" :editMode="editMode" :inputUI="''"/>

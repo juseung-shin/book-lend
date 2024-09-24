@@ -38,5 +38,21 @@ public class PolicyHandler {
         // Sample Logic //
         Book.ifApproveBorrow(event);
     }
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='BookReturned'"
+    )
+    public void wheneverBookReturned_ReturnBook(
+        @Payload BookReturned bookReturned
+    ) {
+        BookReturned event = bookReturned;
+        System.out.println(
+            "\n\n##### listener ReturnBook : " + bookReturned + "\n\n"
+        );
+
+        // Sample Logic //
+        Book.returnBook(event);
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

@@ -119,8 +119,8 @@
             
             this.newValue = {
                 'name': '',
-                'createDt': '2024-09-23',
-                'updateDt': '2024-09-23',
+                'createDt': '2024-09-24',
+                'updateDt': '2024-09-24',
             }
         },
         methods: {

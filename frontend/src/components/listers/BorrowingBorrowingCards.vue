@@ -109,13 +109,13 @@
             me.values = temp.data._embedded.borrowings;
             
             me.newValue = {
-                'userId': '',
-                'bookId': '',
+                'userId': 0,
+                'bookId': 0,
                 'status': '',
-                'createDt': '2024-09-23',
-                'returnDt': '2024-09-23',
-                'rejectDt': '2024-09-23',
-                'confirmDt': '2024-09-23',
+                'createDt': '2024-09-24',
+                'returnDt': '2024-09-24',
+                'rejectDt': '2024-09-24',
+                'confirmDt': '2024-09-24',
             }
         },
         methods:{

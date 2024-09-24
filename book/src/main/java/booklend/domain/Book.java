@@ -126,6 +126,31 @@ public class Book  {
         
     }
 //>>> Clean Arch / Port Method
+//<<< Clean Arch / Port Method
+    public static void returnBook(BookReturned bookReturned){
+        
+        //implement business logic here:
+
+        /** Example 1:  new item 
+        Book book = new Book();
+        repository().save(book);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(bookReturned.get???()).ifPresent(book->{
+            
+            book // do something
+            repository().save(book);
+
+
+         });
+        */
+
+        
+    }
+//>>> Clean Arch / Port Method
 
 
 }

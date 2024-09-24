@@ -47,7 +47,7 @@
             this.value.id = 0;
             this.value.title = '';
             this.value.status = '';
-            this.value.createDt = '2024-09-23';
+            this.value.createDt = '2024-09-24';
         },
         watch: {
         },
