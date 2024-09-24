@@ -33,7 +33,11 @@ public class Book  {
     private String status;
     private Date createDt;
     private Date updateDt;
-    private Long borrowid;
+    private Long borrowId;
+    
+    
+    
+    
     private String borrowStatus;
 
     @PostPersist

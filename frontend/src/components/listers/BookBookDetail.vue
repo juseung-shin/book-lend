@@ -18,7 +18,7 @@
                 <Date label="UpdateDt" v-model="item.updateDt" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <Number label="Borrowid" v-model="item.borrowid" :editMode="editMode" @change="change" />
+                <Number label="BorrowId" v-model="item.borrowId" :editMode="editMode" @change="change" />
             </div>
             <div>
                 <String label="BorrowStatus" v-model="item.borrowStatus" :editMode="editMode" @change="change" />

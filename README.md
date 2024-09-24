@@ -35,7 +35,7 @@ mvn spring-boot:run
 ## Test by API
 - book
 ```
- http :8088/books id="id" title="title" status="status" createDt="createDt" updateDt="updateDt" borrowid="borrowid" borrowStatus="borrowStatus" 
+ http :8088/books id="id" title="title" status="status" createDt="createDt" updateDt="updateDt" borrowId="borrowId" borrowStatus="borrowStatus" 
 ```
 - user
 ```
