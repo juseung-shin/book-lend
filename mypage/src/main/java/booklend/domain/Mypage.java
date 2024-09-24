@@ -16,8 +16,8 @@ public class Mypage {
     //@GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    private Long userid;
+    private Long userId;
     private Long bookId;
     private Long borrowId;
-    private Long status;
+    private String status;
 }
