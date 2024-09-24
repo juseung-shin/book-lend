@@ -85,15 +85,15 @@ public class Book  {
             
         repository().findById(bookBorrowed.getBookId()).ifPresent(book->{
             book.setUpdateDt(new Date());
+            book.setBorrowId(bookBorrowed.getId());
             if (book.getStatus().equals(book.AVAILABLE)) {
                 book.setBorrowStatus(APPROVED);
+                book.setStatus(BORROWED);
                 BookApproved bookApproved = new BookApproved(book);
-                bookApproved.setBorrowId(bookBorrowed.getId());
                 bookApproved.publishAfterCommit();
             } else {
                 book.setBorrowStatus(REJECTED);
                 BookRejected bookRejected = new BookRejected(book);
-                bookRejected.setBorrowId(bookBorrowed.getId());
                 bookRejected.publishAfterCommit();
             }
         
@@ -115,10 +115,10 @@ public class Book  {
      
         
         repository().findById(bookReturned.getBookId()).ifPresent(book->{
-            
-            book.setStatus(book.RETURNED);
-            repository().save(book);
-
+            if (book.getStatus().equals(book.BORROWED)) {
+                book.setStatus(book.AVAILABLE);
+                repository().save(book);
+            }
 
          });
      

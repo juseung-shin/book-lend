@@ -34,9 +34,14 @@ public class BorrowingController {
     ) throws Exception {
         System.out.println("##### /borrowing/request  called #####");
         System.out.println("RequestCommand : " + requestCommand.toString());
-        Borrowing borrowing = new Borrowing();       
-        borrowing.request(requestCommand);
+        Borrowing borrowing = new Borrowing();
+        borrowing.setBookId(requestCommand.getBookId());
+        borrowing.setUserId(requestCommand.getUserId());
+        borrowing.setCreateDt(new Date());
+        borrowing.setStatus(borrowing.REQUESTED);   
         borrowingRepository.save(borrowing);
+        borrowing.request(requestCommand);
+
         return borrowing;
     }
 

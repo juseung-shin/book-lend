@@ -27,10 +27,10 @@ public class MypageViewHandler {
             // view 객체 생성
             Mypage mypage = new Mypage();
             // view 객체에 이벤트의 Value 를 set 함
-            mypage.setUserid(Long.valueOf(bookBorrowed.getUserId()));
-            mypage.setBookId(Long.valueOf(bookBorrowed.getBookId()));
+            mypage.setUserId(bookBorrowed.getUserId());
+            mypage.setBookId(bookBorrowed.getBookId());
             mypage.setBorrowId(bookBorrowed.getId());
-            mypage.setStatus(Long.valueOf(bookBorrowed.getStatus()));
+            mypage.setStatus(bookBorrowed.getStatus());
             // view 레파지 토리에 save
             mypageRepository.save(mypage);
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class MypageViewHandler {
             );
             for (Mypage mypage : mypageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                mypage.setStatus(Long.valueOf(bookApproved.getBorrowStatus()));
+                mypage.setStatus(bookApproved.getBorrowStatus());
                 // view 레파지 토리에 save
                 mypageRepository.save(mypage);
             }
@@ -73,7 +73,7 @@ public class MypageViewHandler {
             );
             for (Mypage mypage : mypageList) {
                 // view 객체에 이벤트의 eventDirectValue 를 set 함
-                mypage.setStatus(Long.valueOf(bookRejected.getBorrowStatus()));
+                mypage.setStatus(bookRejected.getBorrowStatus());
                 // view 레파지 토리에 save
                 mypageRepository.save(mypage);
             }

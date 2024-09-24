@@ -49,10 +49,6 @@ public class Borrowing {
     //<<< Clean Arch / Port Method
     public void request(RequestCommand requestCommand) {
         //implement business logic here:
-        this.setBookId(requestCommand.getBookId());
-        this.setUserId(requestCommand.getUserId());
-        this.setCreateDt(new Date());
-        this.setStatus(REQUESTED);
         BookBorrowed bookBorrowed = new BookBorrowed(this);
         bookBorrowed.publishAfterCommit();
     }
