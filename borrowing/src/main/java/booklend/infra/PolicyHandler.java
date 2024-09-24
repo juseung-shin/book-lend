@@ -38,21 +38,5 @@ public class PolicyHandler {
         // Sample Logic //
         Borrowing.resultApprove(event);
     }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='BookCancled'"
-    )
-    public void wheneverBookCancled_CancelApprove(
-        @Payload BookCancled bookCancled
-    ) {
-        BookCancled event = bookCancled;
-        System.out.println(
-            "\n\n##### listener CancelApprove : " + bookCancled + "\n\n"
-        );
-
-        // Sample Logic //
-        Borrowing.cancelApprove(event);
-    }
 }
 //>>> Clean Arch / Inbound Adaptor

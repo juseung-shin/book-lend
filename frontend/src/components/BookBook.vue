@@ -80,15 +80,15 @@
                 v-if="!editMode"
                 color="primary"
                 text
-                @click="openCancelApproved"
+                @click="openUpdate"
             >
-                CancelApproved
+                Update
             </v-btn>
-            <v-dialog v-model="cancelApprovedDiagram" width="500">
-                <CancelApprovedCommand
-                    @closeDialog="closeCancelApproved"
-                    @cancelApproved="cancelApproved"
-                ></CancelApprovedCommand>
+            <v-dialog v-model="updateDiagram" width="500">
+                <UpdateCommand
+                    @closeDialog="closeUpdate"
+                    @update="update"
+                ></UpdateCommand>
             </v-dialog>
         </v-card-actions>
 
@@ -128,7 +128,7 @@
                 text: '',
             },
             createDiagram: false,
-            cancelApprovedDiagram: false,
+            updateDiagram: false,
         }),
 	async created() {
         },
@@ -247,10 +247,10 @@
                     }
                 }
             },
-            async cancelApproved() {
+            async update() {
                 try {
                     if(!this.offline){
-                        var temp = await axios.post(axios.fixUrl(this.value._links['/cancel'].href))
+                        var temp = await axios.post(axios.fixUrl(this.value._links['/update'].href))
                         for(var k in temp.data) this.value[k]=temp.data[k];
                     }
 

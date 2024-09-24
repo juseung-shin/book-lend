@@ -1,27 +1,27 @@
 package booklend.infra;
 
-import booklend.config.kafka.KafkaProcessor;
 import booklend.domain.*;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+import booklend.config.kafka.KafkaProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class MypageViewHandler {
 
-    //<<< DDD / CQRS
+//<<< DDD / CQRS
     @Autowired
     private MypageRepository mypageRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenBookBorrowed_then_CREATE_1(
-        @Payload BookBorrowed bookBorrowed
-    ) {
+    public void whenBookBorrowed_then_CREATE_1 (@Payload BookBorrowed bookBorrowed) {
         try {
+
             if (!bookBorrowed.validate()) return;
 
             // view 객체 생성
@@ -33,53 +33,51 @@ public class MypageViewHandler {
             mypage.setStatus(Long.valueOf(bookBorrowed.getStatus()));
             // view 레파지 토리에 save
             mypageRepository.save(mypage);
-        } catch (Exception e) {
+
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenBookApproved_then_UPDATE_1(
-        @Payload BookApproved bookApproved
-    ) {
+    public void whenBookApproved_then_UPDATE_1(@Payload BookApproved bookApproved) {
         try {
             if (!bookApproved.validate()) return;
-            // view 객체 조회
+                // view 객체 조회
 
-            List<Mypage> mypageList = mypageRepository.findByBorrowId(
-                bookApproved.getBorrowId()
-            );
-            for (Mypage mypage : mypageList) {
-                // view 객체에 이벤트의 eventDirectValue 를 set 함
-                mypage.setStatus(Long.valueOf(bookApproved.getStatus()));
+                List<Mypage> mypageList = mypageRepository.findByBorrowId(bookApproved.getBorrowId());
+                for(Mypage mypage : mypageList){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    mypage.setStatus(Long.valueOf(bookApproved.getStatus()));
                 // view 레파지 토리에 save
                 mypageRepository.save(mypage);
-            }
-        } catch (Exception e) {
+                }
+
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
-
     @StreamListener(KafkaProcessor.INPUT)
-    public void whenBookCancled_then_UPDATE_2(
-        @Payload BookCancled bookCancled
-    ) {
+    public void when_then_UPDATE_(@Payload  ) {
         try {
-            if (!bookCancled.validate()) return;
-            // view 객체 조회
+            if (!.validate()) return;
+                // view 객체 조회
 
-            List<Mypage> mypageList = mypageRepository.findByBorrowId(
-                bookCancled.getBorrowid()
-            );
-            for (Mypage mypage : mypageList) {
-                // view 객체에 이벤트의 eventDirectValue 를 set 함
-                mypage.setStatus(Long.valueOf(bookCancled.getStatus()));
+                List<Mypage> mypageList = mypageRepository.findByBorrowId(.getBorrowid());
+                for(Mypage mypage : mypageList){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    mypage.setStatus(Long.valueOf(.getStatus()));
                 // view 레파지 토리에 save
                 mypageRepository.save(mypage);
-            }
-        } catch (Exception e) {
+                }
+
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
-    //>>> DDD / CQRS
+
+
+//>>> DDD / CQRS
 }
+

@@ -82,30 +82,6 @@ public class Borrowing {
         */
 
     }
-
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
-    public static void cancelApprove(BookCancled bookCancled) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Borrowing borrowing = new Borrowing();
-        repository().save(borrowing);
-
-        */
-
-        /** Example 2:  finding and process
-        
-        repository().findById(bookCancled.get???()).ifPresent(borrowing->{
-            
-            borrowing // do something
-            repository().save(borrowing);
-
-
-         });
-        */
-
-    }
     //>>> Clean Arch / Port Method
 
 }
