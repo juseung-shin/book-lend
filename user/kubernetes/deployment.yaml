@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: user
-          image: "juseung/user:latest"
+          image: "user17.azurecr.io/user:latest"
           ports:
             - containerPort: 8080
           env:
