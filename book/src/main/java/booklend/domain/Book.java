@@ -1,5 +1,6 @@
 package booklend.domain;
 
+import booklend.domain.BookRejected;
 import booklend.domain.BookApproved;
 import booklend.BookApplication;
 import javax.persistence.*;
@@ -60,6 +61,11 @@ public class Book  {
     public void onPostPersist(){
 
 
+        BookRejected bookRejected = new BookRejected(this);
+        bookRejected.publishAfterCommit();
+
+
+
         BookApproved bookApproved = new BookApproved(this);
         bookApproved.publishAfterCommit();
 
@@ -95,7 +101,7 @@ public class Book  {
 //>>> Clean Arch / Port Method
 
 //<<< Clean Arch / Port Method
-    public static void ifApproveBorrow(BookBorrowed bookBorrowed){
+    public static void approveBook(BookBorrowed bookBorrowed){
         
         //implement business logic here:
 
@@ -103,6 +109,8 @@ public class Book  {
         Book book = new Book();
         repository().save(book);
 
+        BookRejected bookRejected = new BookRejected(book);
+        bookRejected.publishAfterCommit();
         BookApproved bookApproved = new BookApproved(book);
         bookApproved.publishAfterCommit();
         */
@@ -114,6 +122,8 @@ public class Book  {
             book // do something
             repository().save(book);
 
+            BookRejected bookRejected = new BookRejected(book);
+            bookRejected.publishAfterCommit();
             BookApproved bookApproved = new BookApproved(book);
             bookApproved.publishAfterCommit();
 

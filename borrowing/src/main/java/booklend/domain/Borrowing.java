@@ -61,7 +61,31 @@ public class Borrowing {
     //>>> Clean Arch / Port Method
 
     //<<< Clean Arch / Port Method
-    public static void resultApprove(BookApproved bookApproved) {
+    public static void updateStatus(BookRejected bookRejected) {
+        //implement business logic here:
+
+        /** Example 1:  new item 
+        Borrowing borrowing = new Borrowing();
+        repository().save(borrowing);
+
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(bookRejected.get???()).ifPresent(borrowing->{
+            
+            borrowing // do something
+            repository().save(borrowing);
+
+
+         });
+        */
+
+    }
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public static void updateStatus(BookApproved bookApproved) {
         //implement business logic here:
 
         /** Example 1:  new item 
