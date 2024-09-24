@@ -9,7 +9,6 @@ import lombok.Data;
 public class BookApproved extends AbstractEvent {
 
     private Long id;
-    private String status;
     private Date updateDt;
     private Long borrowId;
     private String borrowStatus;
