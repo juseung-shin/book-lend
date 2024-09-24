@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: user
-        sidecar.istio.io/inject: "true"
+        sidecar.istio.io/inject: "true" #사이드카 설정
     spec:
       containers:
         - name: user
@@ -24,7 +24,7 @@ spec:
             - name: APP_ENV  # ConfigMap에서 환경 변수 주입
               valueFrom:
                 configMapKeyRef:
-                  name: user-config햐
+                  name: user-config
                   key: APP_ENV
             - name: APP_DEBUG
               valueFrom:
