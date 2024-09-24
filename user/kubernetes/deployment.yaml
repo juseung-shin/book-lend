@@ -19,6 +19,22 @@ spec:
           image: "juseung/user:latest"
           ports:
             - containerPort: 8080
+          env:
+            - name: APP_ENV  # ConfigMap에서 환경 변수 주입
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: APP_ENV
+            - name: APP_DEBUG
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: APP_DEBUG            
+            - name: API_KEY # Secret에서 환경 변수 주입 (API 키 사용)
+              valueFrom:
+                secretKeyRef:
+                  name: user-api-secret
+                  key: API_KEY            
           readinessProbe:
             httpGet:
               path: '/actuator/health'

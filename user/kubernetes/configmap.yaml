@@ -1,0 +1,8 @@
+# configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-config
+data:
+  APP_ENV: "Docker"
+  APP_DEBUG: "false"
