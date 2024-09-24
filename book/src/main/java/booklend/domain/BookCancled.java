@@ -15,6 +15,7 @@ public class BookCancled extends AbstractEvent {
     private Date updateDt;
     private Long borrowid;
     private String status;
+    private String borrowStatus;
 
     public BookCancled(Book aggregate) {
         super(aggregate);
