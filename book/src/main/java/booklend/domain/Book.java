@@ -38,15 +38,15 @@ public class Book  {
 
     @PostPersist
     public void onPostPersist(){
-        if (this.getStatus().equals(AVAILABLE)) {
-            this.setBorrowStatus(APPROVED);
-            BookApproved bookApproved = new BookApproved(this);
-            bookApproved.publishAfterCommit();
-        } else {
-            this.setBorrowStatus(REJECTED);
-            BookRejected bookRejected = new BookRejected(this);
-            bookRejected.publishAfterCommit();    
-        }
+        // if (this.getStatus().equals(AVAILABLE)) {
+        //     this.setBorrowStatus(APPROVED);
+        //     BookApproved bookApproved = new BookApproved(this);
+        //     bookApproved.publishAfterCommit();
+        // } else {
+        //     this.setBorrowStatus(REJECTED);
+        //     BookRejected bookRejected = new BookRejected(this);
+        //     bookRejected.publishAfterCommit();    
+        // }
     }
 
     public static BookRepository repository(){
@@ -78,29 +78,18 @@ public class Book  {
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
     public static void approveBook(BookBorrowed bookBorrowed){
-        
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Book book = new Book();
-        repository().save(book);
-
-        BookRejected bookRejected = new BookRejected(book);
-        bookRejected.publishAfterCommit();
-        BookApproved bookApproved = new BookApproved(book);
-        bookApproved.publishAfterCommit();
-        */
-
-         
-        repository().findById(bookBorrowed.getBookId()).ifPresent(book->{
             
+        repository().findById(bookBorrowed.getBookId()).ifPresent(book->{
+            book.setUpdateDt(new Date());
             if (book.getStatus().equals(book.AVAILABLE)) {
                 book.setBorrowStatus(APPROVED);
                 BookApproved bookApproved = new BookApproved(book);
+                bookApproved.setBorrowId(bookBorrowed.getId());
                 bookApproved.publishAfterCommit();
             } else {
                 book.setBorrowStatus(REJECTED);
                 BookRejected bookRejected = new BookRejected(book);
+                bookRejected.setBorrowId(bookBorrowed.getId());
                 bookRejected.publishAfterCommit();
             }
         
